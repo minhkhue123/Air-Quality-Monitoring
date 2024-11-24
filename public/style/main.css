@@ -1,0 +1,502 @@
+@media (min-width: 768px){
+    /* NEW UPDATE | DATE: 29/9/2024: Header + Navbar CSS*/
+    .hider{
+      display: none !important;
+    }
+    #header-bar{
+        display: flex;
+        justify-content: space-around;
+        height: 60px;
+        background-color: var(--neutral-color);
+        position: fixed;
+        padding:20px 10px;
+        z-index: 101;
+        width: 100%;
+    }
+    
+    .brand-name{
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+    }
+    
+    .brand-name, h1{
+        font-size: 20px;
+        font-family: 'Courier New', Courier, monospace;
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
+    }
+
+    .brand-name, h3{
+        font-size: 20px;
+        font-family: 'Courier New', Courier, monospace;
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
+    }
+
+    #nav-bar{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 50%;
+    }
+
+    .navbar-list{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .navbar-list li{
+        margin: 0 10px 0 10px;
+    }
+
+    .navbar-list li a{
+        color: var(--text-color);
+    }
+
+    .navbar-list li a:hover{
+        text-decoration: underline red;
+    }
+
+    .search-bar{
+        margin-left: 20px;
+        width: 45%;
+    }
+
+    .search-bar input{
+        padding: 10px 0;
+        width: 70%;
+    }
+
+    .search-bar input::placeholder{
+        padding-left: 5px;
+    }
+    
+    .search-bar button{
+        padding: 10px 15px;
+    }
+
+    .user-class{
+        display: flex;
+        flex-direction: row;
+        width: 20%;
+        align-items: center;
+    }
+
+    .user-img{
+        width: 40px;
+        height: 40px;   
+        border-radius: 50%;
+        margin: 0 10px ;
+    }
+
+    .user-class span, a{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    /* NEW UPDATE | 5/10/2024: Section */
+    section{
+        padding-top: 120px;
+    }
+
+    article{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+
+
+    /* NEW UPDATE | 5/10/2024: Weather Box */
+    
+      .weather-infor {
+        background-color: #2d3756;
+        padding: 20px;
+        border-radius: 10px;
+        width: 75%;
+        color: white;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .weatherResult{
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .weather-infor h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: var(--neutral-color);
+        
+      }
+      
+      #weatherResult h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+      
+      #weatherResult p {
+        font-size: 16px;
+        margin: 5px 0;
+      }
+      
+      #weatherResult img {
+        width: 50px;
+        vertical-align: middle;
+        margin-right: 10px;
+      }
+      
+      button#getWeather {
+        background-color: #536dfe;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      
+      button#getWeather:hover {
+        background-color: #455ede;
+      }
+      
+      .weather-details {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+      }
+      
+      .weather-details .detail {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      
+      .weather-details .detail span {
+        font-size: 16px;
+      }
+      
+      .weather-details .detail .value {
+        font-size: 14px;
+        font-weight: bold;
+      }
+      
+      .weather-details .detail img {
+        width: 25px;
+        height: 25px;
+      }
+      
+      .air-quality {
+        color: #f57c00;
+      }
+    
+    /* NEW UPDATE | 5/10/2024: Card box */
+      /* Filter */
+      #cards-div{
+        width: 100%;
+      }
+
+      .filter-checker{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .filter-checker p{
+        padding: 5px 7px;
+        display: flex;
+      }
+
+      /* KHUNG SỐ LIỆU */
+      
+      #cards-div {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .filter-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      
+      .filter-checker {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+      
+      .cardsBody {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        width: 100%;
+      }
+      
+      .cardItem {
+        background: #f7f7f7;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+        text-align: center;
+      }
+      
+      .cardItem p {
+        margin: 10px 0;
+        font-size: 1.1em;
+      }
+      
+      .cardItem .reading {
+        font-size: 1.3em;
+        font-weight: bold;
+      }
+      
+      .cardsChart {
+        margin-top: 20px;
+      }
+      
+      .chart-container {
+        height: 200px;
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 10px;
+      }
+      
+      .expand-button,
+      #view-data-button,
+      #hide-data-button,
+      #delete-button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 1em;
+        margin-top: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #059e8a;
+        color: #ffffff;
+        cursor: pointer;
+        transition:  0.3s;
+      }
+
+      .expand-button:hover,
+      #view-data-button:hover,
+      #hide-data-button:hover,
+      #delete-button:hover {
+        background-color: #047a66;
+      }
+
+      
+      .chartHide{
+        display: none;
+      }
+
+      /* Modal xóa dữ liệu */
+      .hideModal{
+        display: none !important;
+      }
+
+      .modal{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1001;
+        overflow: hidden;
+        margin: 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+      }
+
+      .no-scroll{
+        overflow: hidden;
+      }
+
+      .modal-content{
+        position: absolute;
+        top: 51%;
+        left: 31.5%;
+        padding: 30px 40px;
+        background-color: var(--neutral-color);
+        border: 1px solid var(--text-color);
+        border-radius: 3px;
+      }
+
+      .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .modal-content span{
+        margin-left: 100%;
+      }
+
+      .close:hover,
+      .close:focus {
+          color: #f44336;
+          cursor: pointer;
+      }
+
+      .modal-content h1{
+        font-size: 28px;
+        margin-bottom: 5px;
+      }
+
+      .modal-content p{
+        font-size: 18px;
+      }
+
+      .clearfix{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 60%;
+        margin-top: 10px;
+      }
+
+      .deletebtn{
+        background-color: #c52c2c;
+        color: var(--neutral-color);
+        padding: 8px 16px;
+        font-size: 16px;
+        border-radius: 3px;
+      }
+
+      .cancelbtn{
+        background-color: var(--neutral-color);
+        counter-reset: var(--text-color);
+        padding: 8px 16px;
+        font-size: 16px;
+        border-radius: 3px;
+      }
+
+      /* NEW UPDATE: Login form */
+      .login-modal{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: url(/public/imgFolder/img.jpg);
+        background-size: cover;
+        background-position: center;
+      }
+
+      .wrapper{
+        min-width: 300px;
+        width: 420px;
+        background-color: transparent;
+        color: var(--neutral-color);
+        border: 2px solid rgba(255, 255, 255, .2);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+        padding: 30px 40px;
+      }
+    
+
+      .wrapper h1{
+        font-size: 46px;
+        text-align: center;
+        color: var(--neutral-color);
+      }
+
+      .wrapper .input-box{
+        width: 100%;
+        height: 50px;
+        margin: 30px 0;
+        position: relative;
+      }
+
+      .input-box .formInput{
+        width: 98%;
+        height: 100%;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        border: 2px solid rgba(255, 255, 255, .2);
+        border-radius: 40px;
+        font-size: 16px;
+        color: var(--neutral-color);
+        text-indent: 10px;
+      }
+
+      .input-box .formInput::placeholder{
+        color: var(--neutral-color);
+        background-color: transparent;
+        border: none;
+      }
+
+      .input-box .iconForm{
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .wrapper .remember-forgot{
+        display: flex;
+        justify-content: space-between;
+        font-size: 14.5px;
+        margin: -15px 0 15px;
+      }
+
+      .remember-forgot label input{
+        accent-color: var(--neutral-color);
+        margin-right: 3px;
+      }
+
+      .remember-forgot a{
+        color: var(--neutral-color);
+        text-decoration: none;
+      }
+
+      .remember-forgot a:hover{
+        text-decoration: none;
+      }
+
+      .wrapper .btn{
+        width: 100%;
+        height: 40px;
+        background: var(--neutral-color);
+        border: none;
+        outline: none;
+        border-radius: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        cursor: pointer;
+        font-size: 16px;
+        color: var(--text-color);
+        font-weight: 600;
+      }
+
+      .wrapper .register-link{
+        font-size: 14.5px;
+        text-align: center;
+        margin: 20px 0 15px;
+      }
+
+      .register-link p a{
+        color: var(--neutral-color);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .register-link p a:hover{
+        text-decoration: underline;
+      }
+}

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Senior Project Group 3</title>
+
+    <!-- NEW UPDATE | DATE" 29/9/2024: CSS File -->
+    <link rel="stylesheet" href="/public/style/main.css">
+    <link rel="stylesheet" href="/public/style/base.css">
+    <link rel="stylesheet" href="/public/fontawesome-free-6.6.0-web/css/all.css">
+    <link rel="icon" href="/public/imgFolder/Oxygen.webp" type="image/x-icon">
+    <script src="/public/fontawesome-free-6.6.0-web/js/all.js"></script>
+    <script src="/public/javascript/weatherapi.js"></script>
+
+    <!-- khởi tạo Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+
+    <!-- khởi tạo các tính năng cần sử dụng trong firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+
+    <script>
+      // Rcác cấu hình applicatni đăng kí khi tiến hành tạo app trong project firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyCsyvXFW657h5VI1c2jZQa89O4RTFO40Hw",
+        authDomain: "test-senior-project-634ba.firebaseapp.com",
+        databaseURL: "https://test-senior-project-634ba-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "test-senior-project-634ba",
+        storageBucket: "test-senior-project-634ba.appspot.com",
+        messagingSenderId: "574615049755",
+        appId: "1:574615049755:web:9847b03ff61d8ea01c8abe"
+        };
+
+      // khởi tạo firebase
+      firebase.initializeApp(firebaseConfig);
+
+      /// tạô các tham chiếu đến auth và database
+      const auth = firebase.auth();
+      const db = firebase.database();
+
+    </script>
+
+    <!-- khởi tạo highchartsjs để vẽ biểu đồ-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- khởi tạo jquery để sử dụng định dang bảng biểu-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="icon" type="image/png" href="imgFolder/favicon.png">
+    <!--tham chiếu đến tệp stylesheet (file .css)-->
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+
+  </head>
+
+  <body class="" onload="getWeather();">
+    <!-- NEW UPDATE | Date: 29/9/2024: Header + Nav bar  -->
+    <header id="header-bar" class="hider">
+      <div class="brand-name">
+        <h1>Senior Project Group 3 - Application</h1>
+        <h3>Air Quality Monitoring System</h3>
+      </div>
+      <nav id="nav-bar">
+        <ul class="navbar-list">
+          <li><a href="#">Giới thiệu</a></li>
+          <li><a href="#">Chất lượng không khí</a></li>
+          <li><a href="#">Hỗ trợ</a></li>
+        </ul>
+        <div class="search-bar">
+          <input type="text" placeholder="Nhập từ khóa">
+          <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+      </nav>
+      <div class="user-class">
+        <img src="/public/imgFolder/OIP.jpg" alt="AVATAR" class="user-img">
+        <span id="user-details">USEREMAIL</span>
+        <a href="/" id="logout-link">Log out</a>
+      </div>
+    </header>
+    
+    <!--LOGIN FORM-->
+    <div class="login-modal" id="login-modal">
+      <div class="wrapper">
+        <form id="login-form">
+          <div class="form-elements-container">
+            <h1>Đăng nhập</h1>
+            <div class="input-box">
+              <input type="text" placeholder="Username" id="input-email" class="formInput" required>
+              <i class="fa-solid fa-user iconForm"></i>
+            </div>
+            <div class="input-box">
+              <input type="password" placeholder="Password" id="input-password" class="formInput" required>
+              <i class="fa-solid fa-lock iconForm"></i>
+            </div>
+            <div class="remember-forgot">
+              <label for=""><input type="checkbox" name="" id="">Lưu đăng nhập</label>
+              <a href="#">Quên mật khẩu ?</a>
+            </div>
+            <button type="submit" id="login-button" class="btn">Login</button>
+            <div class="register-link">
+              <p>Bạn chưa có tài khoản? <a href="#">Đăng ký</a></p>
+            </div>
+            <p id="error-message" style="color:red;"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--CONTENT (các chỉ số cảm biến)-->
+    <section id="main-section" class="hider"> <!-- NEW UPDATE| 30/9/2024: CONTENT-->
+      <div class="content-sign-in" id="content-sign-in">
+        <article>
+          <div class="weather-infor">
+            <h1>Dữ liệu thời tiết</h1>
+            <div id="weatherResult">
+              <h2></h2>
+              <p class="temp"></p>
+              <p class="condition"></p>
+              <div class="weather-details">
+                <div class="detail">
+                  <span>AQI</span>
+                  <span class="value air-quality"></span>
+                </div>
+                <div class="detail">
+                  <span>Gió</span>
+                  <span class="value wind"></span>
+                </div>
+                <div class="detail">
+                  <span>Tầm nhìn</span>
+                  <span class="value visibility"></span>
+                </div>
+                <div class="detail">
+                  <span>Áp suất</span>
+                  <span class="value pressure"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+          <div id="cards-div">
+            <div class="filter-box">
+              <!-- <p><span class ="date-time">Last update: <span id="lastUpdate"></span></span></p> -->
+              <div class="filter-checker">
+                <h3>Filter:</h3>
+                <p>Cards: <input type="checkbox" id="cards-checkbox" name="cards-checkbox" checked></p>
+                <p>Gauges: <input type="checkbox" id="gauges-checkbox" name="gauges-checkbox" checked></p>
+                <p>Charts: <input type="checkbox" id="charts-checkbox" name="charts-checkbox" unchecked></p>
+              </div>
+            </div>
+            <div class="cardsBody">
+              <!--TEMPERATURE-->
+              <div class="cardItem">
+                <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i> TEMPERATURE</p>
+                <p><span class="reading"><span id="temp"></span> &deg;C</span></p>
+
+                <div class="cardsChart chartHide">
+                  <div class="card">
+                    <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i> TEMPERATURE CHART</p>
+                    <div id="chart-temperature" class="chart-container"></div>
+                  </div>
+                </div>
+              </div>
+              <!--HUMIDITY-->
+              <div class="cardItem">
+                <p><i class="fas fa-tint" style="color:#00add6;"></i> HUMIDITY</p>
+                <p><span class="reading"><span id="hum"></span> &percnt;</span></p>
+
+                <div class="cardsChart chartHide">
+                  <div class="card">
+                    <p><i class="fas fa-tint" style="color:#00add6;"></i> HUMIDITY CHART</p>
+                    <div id="chart-humidity" class="chart-container"></div>
+                  </div>
+                </div>
+              </div>
+              <!--CO2-->
+              <div class="cardItem">
+                <p><i class="fas fa-mq135-double-down" style="color:#e1e437;"></i> C02</p>
+                <p><span class="reading"><span id="co2"></span> ppm</span></p>
+
+              </div>
+              <!--CO-->
+              <div class="cardItem">
+                <p><i class="fas fa-mq135-half" style="color:#059e8a;"></i> CO</p>
+                <p><span class="reading"><span id="co"></span> ppm</span></p>
+
+                
+              </div>
+              <!--NH4-->
+              <div class="cardItem">
+                <p><i class="fas fa-mq135-tint" style="color:#00add6;"></i> NH4</p>
+                <p><span class="reading"><span id="nh4"></span> ppm</span></p>
+
+              </div>
+              <!--Dust Density-->
+              <div class="cardItem">
+                <p><i class="fas fa-mq135-double-down" style="color:#e1e437;"></i> Dust Density</p>
+                <p><span class="reading"><span id="dustDensity"></span> ug/m3</span></p>
+
+              </div>
+            </div>
+            <button class="expand-button" onclick="toggleCharts()">Show Charts</button>
+            <!-- Nút xem dữ liệu -->
+            <button id="view-data-button">View all data</button>
+            <!-- Nút ẩn dữ liệu -->
+            <button id="hide-data-button" style= "display:none;">Hide data</button>
+            <!-- Nút xoas dữ liệu -->
+            <button id="delete-button" class="deletebtn" onclick="openModal();">Delete data</button>
+
+          </div>
+
+        </article>
+        <!--LAST UPDATE-->
+        
+        <!-- CHARTS
+        <div id="charts-div" style="display:none">
+          NƠI CẬP NHẬP SỐ LƯỢNG DỮ LIỆU
+          <div>
+            <p> Number of readings: <input type="number" id="charts-range"></p>
+          </div>
+          BIỂU ĐỒ NHIỆT ĐỘ (ĐỘ C)
+          <div class="cards">
+            <div class="card">
+              <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i> TEMPERATURE CHART</p>
+              <div id="chart-temperature" class="chart-container"></div>
+            </div>
+          </div>
+          BIỂU ĐỒ ĐỘ ẨM
+          <div class="cards">
+            <div class="card">
+              <p><i class="fas fa-tint" style="color:#00add6;"></i> HUMIDITY CHART</p>
+              <div id="chart-humidity" class="chart-container"></div>
+            </div>
+          </div>
+        </div> -->
+  
+      <!--NÚT XỬ LÝ CÁC DỮ LIỆU-->
+      <!--mẫu để xóa dữ liệu-->
+      <div id="delete-modal" class="modal hideModal">
+        <form id= "delete-data-form" class="modal-content" action="/">
+          <span onclick="closeModal();" id ="x-btn"title="Close Modal"><i class="fa-solid fa-x"></i></span>
+          <div class="container">
+            <h1>Delete Data</h1>
+            <p>Are you sure you want to delete all data from database?</p>
+            <div class="clearfix">
+              <button type="submit" onclick="closeModal();" class="deletebtn">Delete</button>
+              <button type="button" onclick="closeModal();" class="cancelbtn">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+  
+      <!--BẢNG DỮU LIỆU-->
+      <div class ="cards">
+        <div class="card" id="table-container" style= "display:none;">
+          <table id="readings-table">
+              <tr id="theader">
+                <th>Timestamp</th>
+                <th>Temp (ºC)</th>
+                <th>Humidity (%)</th>
+                <th>CO2 (ppm)</th>
+                <th>CO (ppm)</th>
+                <th>NH4 (ppm)</th>
+                <th>Dust Density (ug/m3)</th>
+              </tr>
+              <tbody id="tbody">
+              </tbody>
+          </table>
+          <p><button id="load-data" style= "display:none;">More results...</button></p>
+        </div>
+      </div>
+  
+    </div>
+    </section>
+
+    <!--SỬ DỤNG NODE.JS ĐÃ THIẾT LẬP-->
+    <script src="javascript/auth.js"></script>
+    <script src="javascript/charts-definition.js"></script>
+    <script src="javascript/index.js"></script>
+
+  </body>
+
+</html>
